@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <title>Training vs Friends</title>
+</head>
+<body>
+    <div class="container border border-5">
+        <div class="flex-container d-flex justify-content-around">
+            <div>
+                <h1>Welcome in, {{user.first_name}}!!!</h1>
+            </div>
+            <div class="text-end">
+                <a href="/new" class="btn btn-secondary btn-sm">add a workout</a> <a href="/logout" class="btn btn-secondary btn-sm">Logout</a>
+            </div>
+        </div>
+        <div class="container col-9">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>workouts</th>
+                        <th>breaks</th>
+                        <th>time</th>
+                        <th>action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for training in all_training %}
+                        <tr>
+                            <td>{{ training.workout }}</td>
+                            <td>{{ training.breaks }}</td>
+                            <td>{{ training.date }}</td>
+                            <td>
+                                <a href="/workouts/{{training.id}}">View</a>
+                                {% if training.user.id == session["user_id"] %}
+                                <td><a href="/delete/{{training.id}}">Delete</a></td>
+                                <td><a href="/edit/{{training.id}}">Edit</a></td>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

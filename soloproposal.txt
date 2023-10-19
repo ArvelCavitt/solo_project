@@ -1,0 +1,17 @@
+Name: Arvel Vincent Cavitt
+Project Title: Fitness Tracker --> similar to chore tracker
+GitHub Link: https://github.com/ArvelCavitt/fitness_tracker.git
+
+Solo Proposal:
+
+    The main reason why i connect this project with the Chore Tracker example is because
+it will perform pretty similar the main difference is that it will be about work outs
+you can do at home/gym/outdoors that you can keep track of.
+    maybe I can set it up as a challenge for friends to push each other  to compete in a friendly competition.
+
+*First step would include a Login/Registration
+*Anyone who is logged in can see the different type of workouts that is displayed
+and will be removed if someone already completed it before you.
+
+Wireframe: https://lucid.app/lucidchart/4d9dca8a-7aa4-4c70-87eb-e9d96b1cc424/edit?viewport_loc=-33%2C-83%2C1659%2C1431%2C0_0&invitationId=inv_893fc1de-7b29-47cf-af72-254f04937435
+ * couldn't put some features i wanted to because i have to pay and i'm currently struggling *
