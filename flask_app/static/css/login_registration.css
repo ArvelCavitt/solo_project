@@ -12,3 +12,7 @@ body{
     padding: 20px;
     text-align: center;
 }
+
+.btn-custom {
+    background-color: #8bc34a;
+}
