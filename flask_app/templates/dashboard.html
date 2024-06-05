@@ -10,18 +10,24 @@
     <title>Training vs Friends</title>
 </head>
 <body>
-    <div class="container border border-5">
-        <div class="flex-container d-flex justify-content-around">
-            <div>
-                <h1>Welcome in, {{user.first_name}}!!!</h1>
-            </div>
+    <div class="banner">
+        <h1 class="display-4">Training vs Friends</h1>
+    </div>
+
+
+    <div class="container">
+        <!-- previous class styling -->
+        <!-- class="flex-container d-flex justify-content-around" -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Welcome in, {{user.first_name}}!!!</h1>
             <div class="text-end">
-                <a href="/new" class="btn btn-custom btn-sm">add a workout</a> <a href="/logout" class="btn btn-custom btn-sm">Logout</a>
+                <a href="/new" class="btn btn-custom btn-sm me-2">add a workout</a>
+                <a href="/logout" class="btn btn-custom btn-sm">Logout</a>
             </div>
         </div>
-        <div class="container col-9">
+        <div class="table-resposive">
             <table class="table table-hover table-striped">
-                <thead>
+                <thead class="table-dark">
                     <tr>
                         <th>workouts</th>
                         <th>breaks</th>
@@ -38,8 +44,8 @@
                             <td>
                                 <a href="/workouts/{{training.id}}">View</a>
                                 {% if training.user.id == session["user_id"] %}
-                                <td><a href="/delete/{{training.id}}">Delete</a></td>
-                                <td><a href="/edit/{{training.id}}">Edit</a></td>
+                                    <a href="/delete/{{training.id}}" class="btn bnt-danger btn-sm">Delete</a>
+                                    <a href="/edit/{{training.id}}" class="btn bnt-warning btn-sm">Edit</a>
                                 {% endif %}
                             </td>
                         </tr>
@@ -48,6 +54,7 @@
             </table>
         </div>
     </div>
-
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-VfYer2FHa7YZqBn6W+B6Y3pZ6Jrm2F3n38+8PeT3MTFjsKAtaPP/AYWfIQIrsN5t" crossorigin="anonymous"></script>
 </body>
 </html>
