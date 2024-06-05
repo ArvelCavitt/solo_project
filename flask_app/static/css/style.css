@@ -1,32 +1,18 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
+
+body {
     background-color: #f0f3f0;
     font-family: 'Arial', sans-serif;
     color: #333;
 }
 
-.btn-custom {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 1s ease, transform 1s ease;
-}
-
-.btn-custom:hover {
-    background-color: #45a049 !important;
-    transform: translateY(-2px);
-}
 
 .banner {
-    /* background-color: #4CAF50; */
     background: linear-gradient(to right, #4CAF50, #3e8e41);
     color: white;
     padding: 20px;
@@ -35,26 +21,51 @@ body{
     margin-bottom: 20px;
 }
 
+
+.btn-custom {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-custom:hover {
+    background-color: #45a049 !important;
+    transform: translateY(-2px);
+}
+
+
 .container {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+    margin-top: 40px;
 }
+
 
 .table {
     margin-top: 20px;
+}
+
+.table thead {
+    background-color: #4CAF50;
+    color: white;
 }
 
 .table-hover tbody tr:hover {
     background-color: #f1f1f1;
 }
 
+
 h1 {
     font-size: 2rem;
     margin-bottom: 20px;
 }
+
 
 .text-end {
     display: flex;
