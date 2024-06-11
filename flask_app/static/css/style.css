@@ -4,23 +4,11 @@
     box-sizing: border-box;
 }
 
-
 body {
     background-color: #f0f3f0;
     font-family: 'Arial', sans-serif;
     color: #333;
 }
-
-
-.banner {
-    background: linear-gradient(to right, #4CAF50, #3e8e41);
-    color: white;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
 
 .btn-custom {
     background-color: #4CAF50;
@@ -37,6 +25,14 @@ body {
     transform: translateY(-2px);
 }
 
+.banner {
+    background: linear-gradient(to right, #4CAF50, #3e8e41);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
 
 .container {
     background-color: white;
@@ -46,30 +42,36 @@ body {
     margin-top: 40px;
 }
 
-
 .table {
     margin-top: 20px;
-}
-
-.table thead {
-    background-color: #4CAF50;
-    color: white;
 }
 
 .table-hover tbody tr:hover {
     background-color: #f1f1f1;
 }
 
-
 h1 {
     font-size: 2rem;
     margin-bottom: 20px;
 }
-
 
 .text-end {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     gap: 10px;
+}
+
+.card {
+    margin-top: 20px;
+}
+
+.card-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.card-text {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
 }
