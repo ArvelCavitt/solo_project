@@ -22,7 +22,7 @@
             <h1 class="card-title text-center">{{ this_workout.workout }}</h1>
             <div class="card-body text-center">
                 <p class="card-text"><strong>Breaks Req:</strong> {{ this_workout.breaks }}</p>
-                <p class="card-text"><strong>Date & Time:</strong> {{ this_workout.date }}</p>
+                <p class="card-text"><strong>Date & Time:</strong> <span id="workout-date"> {{ this_workout.date }} </span></p>
                 <p class="card-text"><strong>Description:</strong> {{ this_workout.description }}</p>
                 <p class="card-text"><strong>Added by:</strong> {{ this_workout.user.first_name }} {{ this_workout.user.last_name }}</p>
                 <div class="mt-4">
@@ -34,5 +34,20 @@
     </div>
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-VfYer2FHa7YZqBn6W+B6Y3pZ6Jrm2F3n38+8PeT3MTFjsKAtaPP/AYWfIQIrsN5t" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateElement = document.getElementById('workout-date');
+            const date = new Date(dateElement.textContent);
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric', 
+                hour: '2-digit', 
+                minute: '2-digit'
+            };
+            dateElement.textContent = date.toLocaleDateString('en-US', options);
+        });
+    </script>
 </body>
 </html>
