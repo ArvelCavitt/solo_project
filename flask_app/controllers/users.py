@@ -17,6 +17,14 @@ def index():
 #     }
 #     return render_template("dashboard.html",user=User.get_id(data))
 
+@app.route('/register')
+def reg():
+    return render_template('register.html')
+
+@app.route('/login')
+def log():
+    return render_template('login.html')
+
 @app.route('/register', methods=['POST'])
 def register():
     if not User.validate_register(request.form):
