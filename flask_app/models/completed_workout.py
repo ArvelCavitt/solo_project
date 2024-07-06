@@ -17,13 +17,11 @@ class CompletedWorkout:
     @classmethod
     def get_completed_workouts_by_user(cls, data):
         query = """
-            SELECT training.workout, training.description, training.breaks, completed_workouts.completed_at
-            FROM completed_workouts
+            SELECT * FROM completed_workouts
             JOIN training ON completed_workouts.training_id = training.id
-            WHERE completed_workouts.user_id = %(user_id)s
-            ORDER BY completed_workouts.completed_at DESC
+            WHERE completed_workouts.user_id = %(user_id)s;
         """
-        results = connectToMySQL(cls.db).query_db(query, data)
+        results = connectToMySQL('your_db').query_db(query, data)
         completed_workouts = []
         for row in results:
             completed_workouts.append(cls(row))
