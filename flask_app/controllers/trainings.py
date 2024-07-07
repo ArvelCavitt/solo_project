@@ -54,9 +54,7 @@ def edit_workouts(id):
     }
     return render_template("edit_workouts.html", this_workout = training.Training.get_one_training(data))
 
-@app.template_filter('datetimeformat')
-def datetimeformat(value, format='%Y-%m-%dT%H:%M'):
-    return value.strftime(format)
+
 
 @app.route("/delete/<int:id>")
 def delete_training(id):
