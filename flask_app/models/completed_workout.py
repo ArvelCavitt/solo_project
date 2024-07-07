@@ -8,6 +8,9 @@ class CompletedWorkout:
         self.user_id = data['user_id']
         self.training_id = data['training_id']
         self.completed_at = data['completed_at']
+        self.workout = data['workout']
+        self.description = data['description']
+        self.breaks = data['breaks']
 
     @classmethod
     def complete_workout(cls,data):
@@ -17,12 +20,16 @@ class CompletedWorkout:
     @classmethod
     def get_completed_workouts_by_user(cls, data):
         query = """
-            SELECT * FROM completed_workouts
-            JOIN training ON completed_workouts.training_id = training.id
-            WHERE completed_workouts.user_id = %(user_id)s;
+        SELECT completed_workouts.*, 
+               training.workout, training.description, training.breaks 
+        FROM completed_workouts
+        JOIN training ON completed_workouts.training_id = training.id
+        WHERE completed_workouts.user_id = %(user_id)s;
         """
-        results = connectToMySQL('your_db').query_db(query, data)
+        results = connectToMySQL(cls.db).query_db(query, data)
+        print("Query Results: ", results)
         completed_workouts = []
-        for row in results:
-            completed_workouts.append(cls(row))
+        if results:
+            for row in results:
+                completed_workouts.append(cls(row))
         return completed_workouts

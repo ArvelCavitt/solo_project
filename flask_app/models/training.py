@@ -42,7 +42,7 @@ class Training:
     def get_all_training(cls):
         query = "SELECT * FROM training JOIN user ON training.user_id = user.id;"
         results = connectToMySQL(cls.db).query_db(query)
-        print("results", results)
+        # print("results", results)
         if len(results) == 0:
             return[]
         else:
@@ -61,7 +61,7 @@ class Training:
                 user_obj = user.User(user_dictionary)
                 training_obj.user = user_obj
                 trainings.append(training_obj)
-            print("trainings",trainings)
+            # print("trainings",trainings)
             
             return trainings
 
