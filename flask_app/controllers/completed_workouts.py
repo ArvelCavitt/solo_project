@@ -25,10 +25,10 @@ def dashboard():
     user_id = session["user_id"]
     data = {"user_id": user_id}
 
-    all_training= Training.get_all_training()
+    all_training = Training.get_all_training()
     completed_workouts = CompletedWorkout.get_completed_workouts_by_user(data)
 
-    print("All Training", all_training)
+    print("All Training: ", all_training)
     print("Completed Workouts: ", completed_workouts)
 
-    return render_template("dashboard.html", completed_workouts=completed_workouts, all_training=all_training)
+    return render_template("dashboard.html", completed_workouts=completed_workouts, all_training=all_training, user_id=user_id)
