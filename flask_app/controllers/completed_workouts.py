@@ -28,7 +28,7 @@ def dashboard():
     all_training = Training.get_all_training()
     completed_workouts = CompletedWorkout.get_completed_workouts_by_user(data)
 
-    print("All Training: ", all_training)
-    print("Completed Workouts: ", completed_workouts)
+    print("All Training: ", all_training) #Prints the all_training data
+    print("Completed Workouts: ", completed_workouts) #Prints the completed_workouts data
 
-    return render_template("dashboard.html", completed_workouts=completed_workouts, all_training=all_training, user_id=user_id)
+    return render_template("dashboard.html", completed_workouts=completed_workouts, all_training=all_training)
