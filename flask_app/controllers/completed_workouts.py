@@ -3,7 +3,7 @@ from flask_app import app
 from flask_app.models.completed_workout import CompletedWorkout
 from flask_app.models.training import Training
 
-@app.route("/complete_workout/<int:training_id>", methods=["GET","POST"])
+@app.route("/complete_workout/<int:training_id>", methods=["GET", "POST"])
 def complete_workout(training_id):
     if "user_id" not in session:
         return redirect('/')
