@@ -20,7 +20,7 @@ class CompletedWorkout:
     @classmethod
     def get_completed_workouts_by_user(cls, data):
         query = """
-        SELECT training.workout, training.description, training.breaks 
+        SELECT * training.workout, training.description, training.breaks 
         FROM completed_workouts
         JOIN training ON completed_workouts.training_id = training.id
         WHERE completed_workouts.user_id = %(user_id)s;
