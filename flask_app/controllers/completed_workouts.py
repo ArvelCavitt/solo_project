@@ -19,13 +19,17 @@ def complete_workout(training_id):
 
 @app.route("/dashboard")
 def dashboard():
+    print("Dashboard route called")
     if "user_id" not in session:
+        print("No user in session, redirecting to home")
         return redirect('/')
     
     user_id = session["user_id"]
     data = {"user_id": user_id}
 
+    print("Fetching all training")
     all_training = Training.get_all_training()
+    print("Fetching completed workouts")
     completed_workouts = CompletedWorkout.get_completed_workouts_by_user(data)
 
     print("All Training: ", all_training) #Prints the all_training data

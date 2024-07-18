@@ -54,7 +54,14 @@
         </div>
 
         <!-- Completed Workouts Table -->
-        <div class="container mt-5">
+
+        <h2>Completed Workouts</h2>
+        <ul>
+        {% for workout in completed_workouts %}
+            <li>{{ workout.workout }} completed at {{ workout.completed_at }}</li>
+        {% endfor %}
+        </ul>
+        <!-- <div class="container mt-5">
             <h1 class="mb-4">Completed Workouts</h1>
             {% if completed_workouts %}
                 <table class="table table-striped">
@@ -80,7 +87,7 @@
             {% else %}
                 <p>No completed workouts yet.</p>
             {% endif %}
-        </div>
+        </div> -->
     </div>
 
     <!-- Bootstrap Bundle with Popper -->
