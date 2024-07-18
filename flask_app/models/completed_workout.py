@@ -21,10 +21,11 @@ class CompletedWorkout:
     @classmethod
     def get_completed_workouts_by_user(cls, data):
         query = """
-        SELECT * training.workout, training.description, training.breaks 
-        FROM completed_workouts
-        JOIN training ON completed_workouts.training_id = training.id
-        WHERE completed_workouts.user_id = %(user_id)s;
+            SELECT completed_workouts.id, completed_workouts.user_id, completed_workouts.training_id, completed_workouts.completed_at,
+                   training.workout, training.description, training.breaks
+            FROM completed_workouts
+            JOIN training ON completed_workouts.training_id = training.id
+            WHERE completed_workouts.user_id = %(id)s;
         """
         results = connectToMySQL(cls.db).query_db(query, data)
         print("Completed Workouts Query Results: ", results)  # Print the raw query results
@@ -34,5 +35,5 @@ class CompletedWorkout:
                 completed_workouts.append(cls(row))
                 print("Completed Workout Row Processed: ", row)  # Print each row processed
         else:
-            print("No completed workouts found for user_id: ", data['user_id'])
+            print("No completed workouts found for user_id: ", data['id'])
         return completed_workouts
