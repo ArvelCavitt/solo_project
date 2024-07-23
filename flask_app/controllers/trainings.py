@@ -31,6 +31,7 @@ def add_workout():
         "breaks": request.form["breaks"],
         "date": request.form["date"],
         "description": request.form["description"],
+        "youtube_url": request.form["youtube_url"],
         "user_id": session["user_id"]
     }
     training.Training.add_training(data)
@@ -43,7 +44,8 @@ def view_workouts(id):
     data = {
         "id":id
     }
-    return render_template("workouts.html", this_workout = training.Training.get_one_training(data))
+    workout = training.Training.get_one_training(data)
+    return render_template("workouts.html", this_workout = workout)
 
 @app.route("/edit/<int:id>")
 def edit_workouts(id):
@@ -52,7 +54,8 @@ def edit_workouts(id):
     data = {
         "id":id
     }
-    return render_template("edit_workouts.html", this_workout = training.Training.get_one_training(data))
+    workout = training.Training.get_one_training(data)
+    return render_template("edit_workouts.html", this_workout = workout)
 
 
 
@@ -78,6 +81,7 @@ def editing_workout(id):
         "breaks": request.form["breaks"],
         "date": request.form["date"],
         "description": request.form["description"],
+        "youtube_url": request.form["youtube_url"],
         "id":id
     }
     training.Training.edit_training(data)

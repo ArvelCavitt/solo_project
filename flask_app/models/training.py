@@ -12,6 +12,7 @@ class Training:
         self.breaks = data["breaks"]
         self.date = data["date"]
         self.description = data["description"]
+        self.youtube_url = data["youtube_url"]
         self.created_at = data["created_at"]
         self.updated_at = data["updated_at"]
         self.user = None
@@ -36,7 +37,7 @@ class Training:
 
     @classmethod
     def add_training(cls, data):
-        query = "INSERT INTO training (workout, breaks, date, description, user_id) VALUES (%(workout)s, %(breaks)s, %(date)s, %(description)s, %(user_id)s)"
+        query = "INSERT INTO training (workout, breaks, date, description, youtube_url, user_id) VALUES (%(workout)s, %(breaks)s, %(date)s, %(description)s, %(youtube_url)s, %(user_id)s)"
         return connectToMySQL(cls.db).query_db(query,data)
 
     @classmethod
@@ -96,5 +97,5 @@ class Training:
 
     @classmethod
     def edit_training(cls,data):
-        query = "UPDATE training SET workout = %(workout)s, breaks = %(breaks)s, date = %(date)s, description = %(description)s WHERE id = %(id)s;"
+        query = "UPDATE training SET workout = %(workout)s, breaks = %(breaks)s, date = %(date)s, description = %(description)s, youtube_url = %(youtube_url)s WHERE id = %(id)s;"
         return connectToMySQL(cls.db).query_db(query,data)

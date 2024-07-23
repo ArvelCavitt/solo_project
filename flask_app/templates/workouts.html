@@ -37,6 +37,12 @@
                 <p class="card-text"><strong>Breaks Req:</strong> {{ this_workout.breaks }}</p>
                 <p class="card-text"><strong>Date & Time:</strong> <span id="workout-date">{{ this_workout.date }}</span></p>
                 <p class="card-text"><strong>Description:</strong> {{ this_workout.description }}</p>
+                <!-- adding url for youtube -->
+                {% if this_workout.youtube_url %}
+                    <iframe width="560" height="315" src="{{ this_workout.youtube_url }}" frameborder="0" allowfullscreen></iframe>
+                {% else %}
+                    <p>No video available.</p>
+                {% endif %}
                 <p class="card-text"><strong>Added by:</strong> {{ this_workout.user.first_name }} {{ this_workout.user.last_name }}</p>
                 <div class="mt-4">
                     <form action="/complete_workout/{{this_workout.id}}" method="POST" style="display:inline;">
@@ -44,6 +50,7 @@
                     </form>
                     <a href="/completed_workouts_dashboard" class="btn btn-secondary">Give Up</a>
                 </div>
+                
             </div>
         </div>
     </div>
