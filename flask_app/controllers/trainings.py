@@ -1,6 +1,7 @@
 from flask_app import app
 from flask import render_template, request, redirect, session
 from flask_app.models import user, training
+from flask_app.models.completed_workout import CompletedWorkout
 
 
 @app.route('/dashboard')
@@ -11,7 +12,13 @@ def home():
         'id': session['user_id']
     }
     print("session", session)
-    return render_template("dashboard.html", user=user.User.get_id(data), all_training = training.Training.get_all_training())
+
+    print("Fetching all training")
+    all_training = training.Training.get_all_training()
+    print("Fetching completed workouts")
+    completed_workouts = CompletedWorkout.get_completed_workouts_by_user(data)
+
+    return render_template("dashboard.html", user=user.User.get_id(data), all_training=all_training, completed_workouts=completed_workouts)
 
 @app.route("/new")
 def training_form():
