@@ -1,7 +1,8 @@
 from flask_app import app
-from flask import render_template, request, redirect, session
+from flask import render_template, request, redirect, session, jsonify
 from flask_app.models import user, training
 from flask_app.models.completed_workout import CompletedWorkout
+from flask_app.services.wger_service import get_random_workout
 
 
 @app.route('/dashboard')
@@ -34,15 +35,20 @@ def add_workout():
     if not training.Training.validate_training(request.form):
         return redirect("/new")
     data = {
-        "workout": request.form["workout"],
+        "workout": request.form.get("workout", ""),
         "breaks": request.form["breaks"],
         "date": request.form["date"],
-        "description": request.form["description"],
+        "description": request.form.get("description", ""),
         "youtube_url": request.form["youtube_url"],
         "user_id": session["user_id"]
     }
     training.Training.add_training(data)
     return redirect("/dashboard")
+
+@app.route("/random_workout")
+def random_workout():
+    random_workout = get_random_workout()
+    return jsonify(random_workout)
 
 @app.route("/workouts/<int:id>")
 def view_workouts(id):
