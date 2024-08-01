@@ -8,15 +8,6 @@ bcrypt = Bcrypt(app)
 def index():
     return render_template('index.html')
 
-# @app.route('/dashboard')
-# def dashboard():
-#     if 'user_id' not in session:
-#         return redirect('/logout')
-#     data ={
-#         'id': session['user_id']
-#     }
-#     return render_template("dashboard.html",user=User.get_id(data))
-
 @app.route('/register')
 def reg():
     return render_template('register.html')
