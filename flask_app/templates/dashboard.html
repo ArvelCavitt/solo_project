@@ -23,6 +23,21 @@
             </div>
         </div>
         
+
+        <!-- Testing for sending and receiving friend request -->
+         <div class="container mt-5">
+            <!-- Send friend request -->
+            <form action="/send_friend_request" method="POST">
+                <label for="receiver_id">Send Friend Request To:</label>
+                <select name="receiver_id" id="receiver_id">
+                    {% for user in users %}
+                        <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Send Friend Request</button>
+            </form>
+         </div>
+
         <!-- Current Workouts Table -->
         <div class="table-responsive">
             <table class="table table-hover table-striped">

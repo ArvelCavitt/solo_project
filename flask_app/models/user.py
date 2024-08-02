@@ -36,6 +36,15 @@ class User:
         return users
 
     @classmethod
+    def get_all_except_current(cls, current_user_id):
+        query = "SELECT * FROM user WHERE id != %(id)s;"
+        results = connectToMySQL(cls.db).query_db(query, {'id': current_user_id})
+        users = []
+        for row in results:
+            users.append(cls(row))
+        return users
+
+    @classmethod
     def get_id(cls,data):
         query = "SELECT * FROM user WHERE id = %(id)s;"
         results = connectToMySQL(cls.db).query_db(query,data)

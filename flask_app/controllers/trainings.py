@@ -1,6 +1,7 @@
 from flask_app import app
 from flask import render_template, request, redirect, session, jsonify
 from flask_app.models import user, training
+from flask_app.models.user import User
 from flask_app.models.completed_workout import CompletedWorkout
 from flask_app.services.wger_service import get_random_workout
 
@@ -19,7 +20,11 @@ def home():
     print("Fetching completed workouts")
     completed_workouts = CompletedWorkout.get_completed_workouts_by_user(data)
 
-    return render_template("dashboard.html", user=user.User.get_id(data), all_training=all_training, completed_workouts=completed_workouts)
+    # for searching for friends i'm adding a get all users
+    current_user_id = session['user_id']
+    users = User.get_all_except_current(current_user_id)
+    
+    return render_template("dashboard.html", user=user.User.get_id(data), all_training=all_training, completed_workouts=completed_workouts, users=users)
 
 @app.route("/new")
 def training_form():
