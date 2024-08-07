@@ -23,7 +23,15 @@ class FriendRequest:
     
     @classmethod
     def get_request_by_user_id(cls, user_id):
-        query = "SELECT * FROM friend_requests WHERE receiver_id = %(user_id)s AND status = 'pending';"
+        # query = "SELECT * FROM friend_requests WHERE receiver_id = %(user_id)s AND status = 'pending';"
+        # results = connectToMySQL(cls.db).query_db(query, {'user_id': user_id})
+
+        query = """
+        SELECT fr.*, u.first_name as sender_first_name, u.last_name as sender_last_name
+        FROM friend_requests fr
+        JOIN user u ON fr.sender_id = u.id
+        WHERE fr.receiver_id = %(user_id)s AND fr.status = 'pending';
+        """
         results = connectToMySQL(cls.db).query_db(query, {'user_id': user_id})
         friend_requests = []
         for row in results:

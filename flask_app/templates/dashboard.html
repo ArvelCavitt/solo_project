@@ -41,7 +41,7 @@
             <ul>
                 {% for request in pending_friend_requests %}
                     <li>
-                        {{ request.sender_id }} has sent you a friend request.
+                        {{ request.sender_first_name }} {{ request.sender_last_name }} has sent you a friend request.
                         <form action="/update_friend_request/{{ request.id }}" method="POST">
                             <input type="hidden" name="status" value="accepted">
                             <button type="submit">Accept</button>
