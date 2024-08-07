@@ -36,6 +36,23 @@
                 </select>
                 <button type="submit">Send Friend Request</button>
             </form>
+
+            <h2>Pending Friend Requests</h2>
+            <ul>
+                {% for request in pending_friend_requests %}
+                    <li>
+                        {{ request.sender_id }} has sent you a friend request.
+                        <form action="/update_friend_request/{{ request.id }}" method="POST">
+                            <input type="hidden" name="status" value="accepted">
+                            <button type="submit">Accept</button>
+                        </form>
+                        <form action="/update_friend_request/{{ request.id }}" method="POST">
+                            <input type="hidden" name="status" value="declined">
+                            <button type="submit">Decline</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
          </div>
 
         <!-- Current Workouts Table -->
