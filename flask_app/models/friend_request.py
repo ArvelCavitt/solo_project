@@ -12,6 +12,8 @@ class FriendRequest:
         self.receiver_id = data['receiver_id']
         self.status = data['status']
         self.created_at = data['created_at']
+        self.sender_first_name = data.get('sender_first_name')
+        self.sender_last_name = data.get('sender_last_name')
 
     @classmethod
     def send_request(cls, data):

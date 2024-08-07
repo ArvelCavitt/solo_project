@@ -22,12 +22,55 @@
                 <a href="/logout" class="btn btn-custom btn-sm">Logout</a>
             </div>
         </div>
-        
+
+        <!-- Temporary section for pending friend requests -->
+        <div class="mt-4">
+            <h2>Pending Friend Requests</h2>
+            {% if pending_friend_requests %}
+                <ul class="list-group">
+                    {% for request in pending_friend_requests %}
+                        <li class="list-group-item">
+                            {{ request.sender_first_name }} {{ request.sender_last_name }}
+                            <form action="/update_friend_request/{{ request.id }}" method="POST" class="d-inline">
+                                <input type="hidden" name="status" value="accepted">
+                                <button type="submit" class="btn btn-success btn-sm">Accept</button>
+                            </form>
+                            <form action="/update_friend_request/{{ request.id }}" method="POST" class="d-inline">
+                                <input type="hidden" name="status" value="declined">
+                                <button type="submit" class="btn btn-danger btn-sm">Decline</button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No pending friend requests.</p>
+            {% endif %}
+        </div>
+
+        <!-- Temporary section for sending friend requests -->
+        <div class="mt-4">
+            <h2>Send Friend Requests</h2>
+            {% if users %}
+                <ul class="list-group">
+                    {% for user in users %}
+                        <li class="list-group-item">
+                            {{ user.first_name }} {{ user.last_name }}
+                            <form action="/send_friend_request" method="POST" class="d-inline">
+                                <input type="hidden" name="receiver_id" value="{{ user.id }}">
+                                <button type="submit" class="btn btn-primary btn-sm">Send Request</button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No users available for sending friend requests.</p>
+            {% endif %}
+        </div>
 
         <!-- Testing for sending and receiving friend request -->
-         <div class="container mt-5">
+         <!-- <div class="container mt-5"> -->
             <!-- Send friend request -->
-            <form action="/send_friend_request" method="POST">
+            <!-- <form action="/send_friend_request" method="POST">
                 <label for="receiver_id">Send Friend Request To:</label>
                 <select name="receiver_id" id="receiver_id">
                     {% for user in users %}
@@ -53,7 +96,7 @@
                     </li>
                 {% endfor %}
             </ul>
-         </div>
+         </div> -->
 
         <!-- Current Workouts Table -->
         <div class="table-responsive">
