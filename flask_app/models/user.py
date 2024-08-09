@@ -37,8 +37,17 @@ class User:
 
     @classmethod
     def get_all_except_current(cls, current_user_id):
-        query = "SELECT * FROM user WHERE id != %(id)s;"
-        results = connectToMySQL(cls.db).query_db(query, {'id': current_user_id})
+        query = """
+        SELECT * FROM user u
+        WHERE u.id != %(current_user_id)s
+        AND u.id NOT IN(
+            SELECT receiver_id FROM friend_requests WHERE sender_id = %(current_user_id)s
+            UNION
+            SELECT sender_id FROM friend_requests WHERE receiver_id = %(current_user_id)s
+        )
+        """
+
+        results = connectToMySQL(cls.db).query_db(query, {'current_user_id': current_user_id})
         users = []
         for row in results:
             users.append(cls(row))

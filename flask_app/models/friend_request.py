@@ -17,6 +17,20 @@ class FriendRequest:
 
     @classmethod
     def send_request(cls, data):
+        # This will check if a request already exists or if they are already friends
+        query = """
+        SELECT * FROM friend_requests
+        WHERE (sender_id = %(sender_id)s receiver_id = %(receiver_id)s)
+        OR (sender_id = %(receiver_id)s AND receiver_id = %(sender_id)s)
+        """
+        existing_requests = connectToMySQL(cls.db).query_db(query, data)
+
+        if len(existing_requests) > 0:
+            flash('Friend request already sent or you are already friends!')
+            return False
+
+        # If there are no existing request we can insert a new friend request
+        
         query = """
         INSERT INTO friend_requests (sender_id, receiver_id, status, created_at)
         VALUES (%(sender_id)s, %(receiver_id)s, %(status)s, NOW());

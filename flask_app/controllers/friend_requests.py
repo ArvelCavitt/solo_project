@@ -14,8 +14,11 @@ def send_friend_request():
         'status': 'pending'
     }
 
-    FriendRequest.send_request(data)
-    flash('Friend request sent!')
+    if FriendRequest.send_request(data):
+        flash('Friend request sent!')
+    else:
+        flash('You have already sent a friend request or are already friends')
+
     return redirect('/dashboard')
 
 @app.route('/friend_requests')
