@@ -10,151 +10,162 @@
     <title>Training vs Friends</title>
 </head>
 <body>
-    <div class="banner">
+    <div class="banner bg-danger text-white p-3 mb-4 text-center">
         <h1 class="display-4">Training vs Friends</h1>
     </div>
 
     <div class="container">
+        <!-- Welcome and Navigation -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1>Welcome in, {{ user.first_name }}!!!</h1>
-            <div class="text-end">
-                <a href="/new" class="btn btn-custom btn-sm me-2">Add a workout</a>
-                <a href="/logout" class="btn btn-custom btn-sm">Logout</a>
+            <div>
+                <a href="/new" class="btn btn-success me-2">Add a workout</a>
+                <a href="/logout" class="btn btn-danger">Logout</a>
             </div>
         </div>
 
-        <!-- Temporary section for pending friend requests -->
-        <div class="mt-4">
-            <h2>Pending Friend Requests</h2>
-            {% if pending_friend_requests %}
-                <ul class="list-group">
-                    {% for request in pending_friend_requests %}
-                        <li class="list-group-item">
-                            {{ request.sender_first_name }} {{ request.sender_last_name }}
-                            <form action="/update_friend_request/{{ request.id }}" method="POST" class="d-inline">
-                                <input type="hidden" name="status" value="accepted">
-                                <button type="submit" class="btn btn-success btn-sm">Accept</button>
-                            </form>
-                            <form action="/update_friend_request/{{ request.id }}" method="POST" class="d-inline">
-                                <input type="hidden" name="status" value="declined">
-                                <button type="submit" class="btn btn-danger btn-sm">Decline</button>
-                            </form>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>No pending friend requests.</p>
-            {% endif %}
-        </div>
-
-        <!-- Temporary section for sending friend requests -->
-        <div class="mt-4">
-            <h2>Send Friend Requests</h2>
-            {% if users %}
-                <ul class="list-group">
-                    {% for user in users %}
-                        <li class="list-group-item">
-                            {{ user.first_name }} {{ user.last_name }}
-                            <form action="/send_friend_request" method="POST" class="d-inline">
-                                <input type="hidden" name="receiver_id" value="{{ user.id }}">
-                                <button type="submit" class="btn btn-primary btn-sm">Send Request</button>
-                            </form>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>No users available for sending friend requests.</p>
-            {% endif %}
-        </div>
-
-        <!-- Testing for sending and receiving friend request -->
-         <!-- <div class="container mt-5"> -->
-            <!-- Send friend request -->
-            <!-- <form action="/send_friend_request" method="POST">
-                <label for="receiver_id">Send Friend Request To:</label>
-                <select name="receiver_id" id="receiver_id">
-                    {% for user in users %}
-                        <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
-                    {% endfor %}
-                </select>
-                <button type="submit">Send Friend Request</button>
-            </form>
-
-            <h2>Pending Friend Requests</h2>
-            <ul>
-                {% for request in pending_friend_requests %}
-                    <li>
-                        {{ request.sender_first_name }} {{ request.sender_last_name }} has sent you a friend request.
-                        <form action="/update_friend_request/{{ request.id }}" method="POST">
-                            <input type="hidden" name="status" value="accepted">
-                            <button type="submit">Accept</button>
-                        </form>
-                        <form action="/update_friend_request/{{ request.id }}" method="POST">
-                            <input type="hidden" name="status" value="declined">
-                            <button type="submit">Decline</button>
-                        </form>
-                    </li>
-                {% endfor %}
-            </ul>
-         </div> -->
-
-        <!-- Current Workouts Table -->
-        <div class="table-responsive">
-            <table class="table table-hover table-striped">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Workouts</th>
-                        <th>Breaks</th>
-                        <th>Time</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for training in all_training %}
-                        <tr>
-                            <td>{{ training.workout }}</td>
-                            <td>{{ training.breaks }}</td>
-                            <td class="workout-date">{{ training.date }}</td>
-                            <td>
-                                <a href="/workouts/{{ training.id }}" class="btn btn-info btn-sm">View</a>
-                                {% if training.user.id == session["user_id"] %}
-                                    <a href="/delete/{{ training.id }}" class="btn btn-danger btn-sm">Delete</a>
-                                    <a href="/edit/{{ training.id }}" class="btn btn-warning btn-sm">Edit</a>
-                                {% endif %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Completed Workouts Table -->
-        <div class="container mt-5">
-            <h1 class="mb-4">Completed Workouts</h1>
-            {% if completed_workouts %}
-                <table class="table table-striped">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Workout</th>
-                            <th>Description</th>
-                            <th>Breaks</th>
-                            <th>Completed At</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for workout in completed_workouts %}
-                            <tr>
-                                <td>{{ workout.workout }}</td>
-                                <td>{{ workout.description }}</td>
-                                <td>{{ workout.breaks }}</td>
-                                <td>{{ workout.completed_at }}</td>
-                            </tr>
+        <!-- Pending Friend Requests -->
+        <div class="card mb-4">
+            <div class="card-header bg-warning">
+                <h2 class="mb-0">Pending Friend Requests</h2>
+            </div>
+            <div class="card-body">
+                {% if pending_friend_requests %}
+                    <ul class="list-group">
+                        {% for request in pending_friend_requests %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{ request.sender_first_name }} {{ request.sender_last_name }}
+                                <div>
+                                    <form action="/update_friend_request/{{ request.id }}" method="POST" class="d-inline">
+                                        <input type="hidden" name="status" value="accepted">
+                                        <button type="submit" class="btn btn-success btn-sm">Accept</button>
+                                    </form>
+                                    <form action="/update_friend_request/{{ request.id }}" method="POST" class="d-inline">
+                                        <input type="hidden" name="status" value="declined">
+                                        <button type="submit" class="btn btn-danger btn-sm">Decline</button>
+                                    </form>
+                                </div>
+                            </li>
                         {% endfor %}
-                    </tbody>
-                </table>
-            {% else %}
-                <p>No completed workouts yet.</p>
-            {% endif %}
+                    </ul>
+                {% else %}
+                    <p class="mb-0">No pending friend requests.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Send Friend Requests -->
+        <div class="card mb-4">
+            <div class="card-header bg-info">
+                <h2 class="mb-0">Send Friend Requests</h2>
+            </div>
+            <div class="card-body">
+                {% if users %}
+                    <ul class="list-group">
+                        {% for user in users %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{ user.first_name }} {{ user.last_name }}
+                                <form action="/send_friend_request" method="POST" class="d-inline">
+                                    <input type="hidden" name="receiver_id" value="{{ user.id }}">
+                                    <button type="submit" class="btn btn-primary btn-sm">Send Request</button>
+                                </form>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="mb-0">No users available for sending friend requests.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Friends List -->
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                <h2 class="mb-0">Your Friends</h2>
+            </div>
+            <div class="card-body">
+                {% if friends %}
+                    <ul class="list-group">
+                        {% for friend in friends %}
+                            <li class="list-group-item">{{ friend.first_name }} {{ friend.last_name }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="mb-0">You have no friends yet.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Current Workouts -->
+        <div class="card mb-4">
+            <div class="card-header bg-dark text-white">
+                <h2 class="mb-0">Workouts</h2>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Workouts</th>
+                                <th>Breaks</th>
+                                <th>Time</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for training in all_training %}
+                                <tr>
+                                    <td>{{ training.workout }}</td>
+                                    <td>{{ training.breaks }}</td>
+                                    <td class="workout-date">{{ training.date }}</td>
+                                    <td>
+                                        <a href="/workouts/{{ training.id }}" class="btn btn-info btn-sm">View</a>
+                                        {% if training.user.id == session["user_id"] %}
+                                            <a href="/delete/{{ training.id }}" class="btn btn-danger btn-sm">Delete</a>
+                                            <a href="/edit/{{ training.id }}" class="btn btn-warning btn-sm">Edit</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Completed Workouts -->
+        <div class="card mb-4">
+            <div class="card-header bg-secondary text-white">
+                <h2 class="mb-0">Completed Workouts</h2>
+            </div>
+            <div class="card-body">
+                {% if completed_workouts %}
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Workout</th>
+                                    <th>Description</th>
+                                    <th>Breaks</th>
+                                    <th>Completed At</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for workout in completed_workouts %}
+                                    <tr>
+                                        <td>{{ workout.workout }}</td>
+                                        <td>{{ workout.description }}</td>
+                                        <td>{{ workout.breaks }}</td>
+                                        <td>{{ workout.completed_at }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="mb-0">No completed workouts yet.</p>
+                {% endif %}
+            </div>
         </div>
     </div>
 

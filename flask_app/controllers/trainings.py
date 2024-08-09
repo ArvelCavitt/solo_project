@@ -25,8 +25,9 @@ def home():
     current_user_id = session['user_id']
     users = User.get_all_except_current(current_user_id)
     pending_friend_requests = FriendRequest.get_request_by_user_id(current_user_id)
+    friends = FriendRequest.get_friends_by_user_id(current_user_id)
 
-    return render_template("dashboard.html", user=user.User.get_id(data), all_training=all_training, completed_workouts=completed_workouts, pending_friend_requests=pending_friend_requests, users=users)
+    return render_template("dashboard.html", user=user.User.get_id(data), all_training=all_training, completed_workouts=completed_workouts, pending_friend_requests=pending_friend_requests, friends=friends, users=users)
 
 @app.route("/new")
 def training_form():

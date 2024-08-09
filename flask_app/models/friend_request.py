@@ -30,7 +30,7 @@ class FriendRequest:
             return False
 
         # If there are no existing request we can insert a new friend request
-        
+
         query = """
         INSERT INTO friend_requests (sender_id, receiver_id, status, created_at)
         VALUES (%(sender_id)s, %(receiver_id)s, %(status)s, NOW());
@@ -62,3 +62,19 @@ class FriendRequest:
         WHERE id = %(id)s
         """
         return connectToMySQL(cls.db).query_db(query, data)
+    
+    @classmethod
+    def get_friends_by_user_id(cls, user_id):
+        query = """
+        SELECT u.*
+        FROM friend_requests fr
+        JOIN user u ON (fr.sender_id = u.id  OR fr.receiver_id = u.id)
+        WHERE (fr.sender_id = %(user_id)s OR fr.receiver_id = %(user_id)s)
+        AND fr.status = 'accepted' AND u.id != %(user_id)s;
+        """
+
+        results = connectToMySQL(cls.db).query_db(query, {'user_id': user_id})
+        friends = []
+        for row in results:
+            friends.append(user.User(row))
+        return friends
