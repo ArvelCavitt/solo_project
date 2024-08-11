@@ -154,7 +154,9 @@
                                 {% for workout in completed_workouts %}
                                     <tr>
                                         <td>{{ workout.workout }}</td>
-                                        <td>{{ workout.description }}</td>
+                                        <td class="description-cell">
+                                            {{ workout.description }}
+                                        </td>
                                         <td>{{ workout.breaks }}</td>
                                         <td>{{ workout.completed_at }}</td>
                                     </tr>

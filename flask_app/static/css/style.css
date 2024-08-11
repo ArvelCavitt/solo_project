@@ -32,6 +32,19 @@ body {
     font-size: 1.1rem;
 }
 
+.description-cell {
+    max-width: 500px;
+    max-height: 100px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    white-space: normal;
+    display: inline-block;
+    padding: 10px;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
 
 
 /* playing around with the index.html */
