@@ -19,9 +19,9 @@ class FriendRequest:
     def send_request(cls, data):
         # This will check if a request already exists or if they are already friends
         query = """
-        SELECT * FROM friend_requests
-        WHERE (sender_id = %(sender_id)s receiver_id = %(receiver_id)s)
-        OR (sender_id = %(receiver_id)s AND receiver_id = %(sender_id)s)
+        SELECT * FROM friend_requests 
+        WHERE (sender_id = %(sender_id)s AND receiver_id = %(receiver_id)s)
+        OR (sender_id = %(receiver_id)s AND receiver_id = %(sender_id)s);
         """
         existing_requests = connectToMySQL(cls.db).query_db(query, data)
 
