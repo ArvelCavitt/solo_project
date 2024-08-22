@@ -32,6 +32,38 @@
         </ul>
     </div>
 
+
+        <!-- Temporary location for Pending Friend Requests -->
+        <!-- <div class="card mb-4">
+            <div class="card-header bg-warning">
+                <h2 class="mb-0">Pending Friend Requests</h2>
+            </div>
+            <div class="card-body">
+                {% if pending_friend_requests %}
+                    <ul class="list-group">
+                        {% for request in pending_friend_requests %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{ request.sender_first_name }} {{ request.sender_last_name }}
+                                <div>
+                                    <form action="/update_friend_request/{{ request.id }}" method="POST" class="d-inline">
+                                        <input type="hidden" name="status" value="accepted">
+                                        <button type="submit" class="btn btn-success btn-sm">Accept</button>
+                                    </form>
+                                    <form action="/update_friend_request/{{ request.id }}" method="POST" class="d-inline">
+                                        <input type="hidden" name="status" value="declined">
+                                        <button type="submit" class="btn btn-danger btn-sm">Decline</button>
+                                    </form>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="mb-0">No pending friend requests.</p>
+                {% endif %}
+            </div>
+        </div> -->
+
+
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
