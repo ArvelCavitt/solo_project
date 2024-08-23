@@ -23,8 +23,10 @@ def register():
     data ={ 
         "first_name": request.form['first_name'],
         "last_name": request.form['last_name'],
+        "age": request.form['age'],
         "email": request.form['email'],
-        "password": bcrypt.generate_password_hash(request.form['password'])
+        "password": bcrypt.generate_password_hash(request.form['password']),
+        "location": request.form['location']
     }
     id = User.save(data)
     session['user_id'] = id

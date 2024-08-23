@@ -25,7 +25,7 @@ class User:
 
     @classmethod
     def save(cls,data):
-        query = "INSERT INTO user (first_name, last_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s)"
+        query = "INSERT INTO user (first_name, last_name, age, email, password, location) VALUES (%(first_name)s, %(last_name)s, %(age)s, %(email)s, %(password)s, %(location)s)"
         return connectToMySQL(cls.db).query_db(query,data)
 
     @classmethod
@@ -87,6 +87,9 @@ class User:
             is_valid= False
         if len(user['last_name']) < 3:
             flash("Last name must be at least 3 characters","register")
+            is_valid= False
+        if len(user['age']) < 1:
+            flash("Must input a valid number","register")
             is_valid= False
         if len(user['password']) < 8:
             flash("Password must be at least 8 characters","register")
