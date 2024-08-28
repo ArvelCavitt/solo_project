@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CSS only -->
+    <!-- Bootstrap & CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Training vs Friends</title>
@@ -38,12 +38,64 @@
         </div>
     </header>
 
-    <div class="container">
-        <!-- Welcome and Navigation -->
-        <div class="container mt-4">
-            <h1>Welcome in, {{ user.first_name }}!!!</h1>
-        </div>
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Left Panel: User Info -->
+            <div class="col-md-3">
+                <div class="card mb-4">
+                    <div class="card-header bg-info text-white">
+                        <h2 class="mb-0">User Info</h2>
+                    </div>
+                    <div class="card-body text-center">
+                        <img src="{{ url_for('static', filename='img/profile_placeholder.png') }}" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="width: 150px;">
+                        <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+                        <p>Location: {{ user.location }}</p>
+                        <p>Age: {{ user.age }}</p>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Center Panel: About Me and Goals -->
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h2 class="mb-0">About Me</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>{{ user.about_me }}</p>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header bg-warning text-white">
+                        <h2 class="mb-0">Personal Goals</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>{{ user.goals }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: New Workouts -->
+            <div class="col-md-3">
+                <div class="card mb-4">
+                    <div class="card-header bg-danger text-white">
+                        <h2 class="mb-0">New Workouts</h2>
+                    </div>
+                    <div class="card-body">
+                        {% if new_workouts %}
+                            <ul class="list-group">
+                                {% for workout in new_workouts %}
+                                    <li class="list-group-item">{{ workout.name }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p class="mb-0">No new workouts available.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Send Friend Requests -->
         <div class="card mb-4">
