@@ -39,43 +39,64 @@
     </header>
 
     <div class="container mt-4">
-        <div class="row">
-            <!-- Left Panel: User Info -->
-            <div class="col-md-3">
-                <div class="card mb-4">
-                    <div class="card-header bg-info text-white">
-                        <h2 class="mb-0">User Info</h2>
-                    </div>
-                    <div class="card-body text-center">
-                        <img src="{{ url_for('static', filename='img/profile_placeholder.png') }}" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="width: 150px;">
-                        <h3>{{ user.first_name }} {{ user.last_name }}</h3>
-                        <p>Location: {{ user.location }}</p>
-                        <p>Age: {{ user.age }}</p>
-                    </div>
+    <div class="row">
+        <!-- Left Panel: User Info -->
+        <div class="col-md-3">
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h2 class="mb-0">User Info</h2>
                 </div>
-            </div>
-
-            <!-- Center Panel: About Me and Goals -->
-            <div class="col-md-6">
-                <div class="card mb-4">
-                    <div class="card-header bg-success text-white">
-                        <h2 class="mb-0">About Me</h2>
-                    </div>
-                    <div class="card-body">
-                        <p>{{ user.about_me }}</p>
-                    </div>
-                </div>
-
-                <div class="card mb-4">
-                    <div class="card-header bg-warning text-white">
-                        <h2 class="mb-0">Personal Goals</h2>
-                    </div>
-                    <div class="card-body">
-                        <p>{{ user.goals }}</p>
-                    </div>
+                <div class="card-body">
+                    <p><img src="path_to_profile_picture" alt="Profile Picture" class="img-fluid"></p>
+                    <p>{{ user.first_name }} {{ user.last_name }}</p>
+                    <p>Location: {{ user.location }}</p>
+                    <p>Age: {{ user.age }}</p>
                 </div>
             </div>
         </div>
+
+        <!-- Center Panel: About Me and Personal Goals -->
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h2 class="mb-0">About Me</h2>
+                </div>
+                <div class="card-body">
+                    <!-- Add content for About Me here -->
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header bg-warning text-white">
+                    <h2 class="mb-0">Personal Goals</h2>
+                </div>
+                <div class="card-body">
+                    <!-- Add content for Personal Goals here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Your Friends -->
+        <div class="col-md-3">
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h2 class="mb-0">Your Friends</h2>
+                </div>
+                <div class="card-body">
+                    {% if friends %}
+                        <ul class="list-group">
+                            {% for friend in friends %}
+                                <li class="list-group-item">{{ friend.first_name }} {{ friend.last_name }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="mb-0">You have no friends yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
 
         <!-- Send Friend Requests -->
         <div class="card mb-4">
@@ -97,24 +118,6 @@
                     </ul>
                 {% else %}
                     <p class="mb-0">No users available for sending friend requests.</p>
-                {% endif %}
-            </div>
-        </div>
-
-        <!-- Friends List -->
-        <div class="card mb-4">
-            <div class="card-header bg-success text-white">
-                <h2 class="mb-0">Your Friends</h2>
-            </div>
-            <div class="card-body">
-                {% if friends %}
-                    <ul class="list-group">
-                        {% for friend in friends %}
-                            <li class="list-group-item">{{ friend.first_name }} {{ friend.last_name }}</li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    <p class="mb-0">You have no friends yet.</p>
                 {% endif %}
             </div>
         </div>
