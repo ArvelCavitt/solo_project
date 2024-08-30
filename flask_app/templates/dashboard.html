@@ -75,27 +75,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Right Panel: New Workouts -->
-            <div class="col-md-3">
-                <div class="card mb-4">
-                    <div class="card-header bg-danger text-white">
-                        <h2 class="mb-0">New Workouts</h2>
-                    </div>
-                    <div class="card-body">
-                        <!-- error fetching the workouts -->
-                        {% if new_workouts %}
-                            <ul class="list-group">
-                                {% for workout in new_workouts %}
-                                    <li class="list-group-item">{{ workout.name }}</li>
-                                {% endfor %}
-                            </ul>
-                        {% else %}
-                            <p class="mb-0">No new workouts available.</p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- Send Friend Requests -->
