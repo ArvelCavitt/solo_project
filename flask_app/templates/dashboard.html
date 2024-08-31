@@ -86,7 +86,11 @@
                     {% if friends %}
                         <ul class="list-group">
                             {% for friend in friends %}
-                                <li class="list-group-item">{{ friend.first_name }} {{ friend.last_name }}</li>
+                                <li class="list-group-item">
+                                    <a href="{{ url_for('view_friend', friend_id=friend.id) }}">
+                                        {{ friend.first_name }} {{ friend.last_name }}
+                                    </a>
+                                </li>
                             {% endfor %}
                         </ul>
                     {% else %}

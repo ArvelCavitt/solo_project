@@ -1,4 +1,5 @@
 from flask_app import app
+from flask_app.config.mysqlconnection import connectToMySQL
 from flask import render_template, request, redirect, session, jsonify
 from flask_app.models import user, training
 from flask_app.models.user import User
@@ -107,3 +108,25 @@ def editing_workout(id):
     }
     training.Training.edit_training(data)
     return redirect("/dashboard")
+
+
+@app.route('/friend/<int:friend_id>')
+def view_friend(friend_id):
+    query = "SELECT * FROM user WHERE id = %(id)s;"
+    data = { 'id': friend_id }
+    friend_info = connectToMySQL('fitness').query_db(query, data)
+
+    workout_query = """
+    SELECT training.*, completed_workouts.*
+    FROM completed_workouts
+    JOIN training ON training.id = completed_workouts.training_id
+    WHERE training.user_id = %(user_id)s;
+    """
+
+    workout_data = {'user_id': friend_id}
+    completed_workouts = connectToMySQL('fitness').query_db(workout_query, workout_data)
+
+    if friend_info:
+        return render_template('friend_profile.html', friend=friend_info[0], completed_workouts=completed_workouts)
+    else:
+        return "Friend not found", 404

@@ -90,6 +90,7 @@ class Training:
             training_obj.user = user_obj
             return training_obj
 
+
     @classmethod
     def delete_training(cls,data):
         query = "DELETE FROM training WHERE id = %(id)s;"
