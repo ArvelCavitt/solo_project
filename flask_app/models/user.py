@@ -19,13 +19,14 @@ class User:
         self.email  = data.get('email')
         self.password  = data.get('password')
         self.location = data.get('location', None)
+        self.about_me = data.get('about_me', '')
         self.created_at  = data.get('created_at')
         self.updated_at  = data.get('updated_at')
         self.training = []
 
     @classmethod
     def save(cls,data):
-        query = "INSERT INTO user (first_name, last_name, age, email, password, location) VALUES (%(first_name)s, %(last_name)s, %(age)s, %(email)s, %(password)s, %(location)s)"
+        query = "INSERT INTO user (first_name, last_name, age, email, password, location, about_me) VALUES (%(first_name)s, %(last_name)s, %(age)s, %(email)s, %(password)s, %(location)s, %(about_me)s)"
         return connectToMySQL(cls.db).query_db(query,data)
 
     @classmethod
