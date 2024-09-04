@@ -54,3 +54,22 @@ def logout():
 @app.route("/my_training")
 def my_training():
     return render_template("my_training.html")
+
+@app.route('/edit_about_me', methods=['GET', 'POST'])
+def edit_about_me():
+    if 'user_id' not in session:
+        return redirect('/login')
+    
+    user_id = session['user_id']
+
+    if request.method == 'POST':
+        about_me = request.form['about_me']
+        data = {
+            'id': user_id,
+            'about_me': about_me
+        }
+        User.update_about_me(data)
+        return redirect('/dashboard')
+    
+    user = User.get_by_id({'id': user_id})
+    return render_template('edit_about_me.html', user=user)

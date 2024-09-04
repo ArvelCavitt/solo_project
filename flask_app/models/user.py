@@ -71,6 +71,23 @@ class User:
             return False
         return cls(results[0])
 
+    @classmethod
+    def update_about_me(cls, data):
+        query = """
+        UPDATE user
+        SET about_me = %(about_me)s, updated_at = NOW()
+        WHERE id = %(id)s
+        """
+        return connectToMySQL(cls.db).query_db(query,data)
+    
+    @classmethod
+    def get_by_id(cls, data):
+        query = "SELECT * FORM user WHERE id = %(id)s;"
+        result = connectToMySQL(cls.db).query_db(query, data)
+        if result:
+            return cls(result[0])
+        return None
+
     @staticmethod
     def validate_register(user):
         is_valid = True

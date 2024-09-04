@@ -63,6 +63,8 @@
                 </div>
                 <div class="card-body">
                     <!-- Add content for About Me here -->
+                     <p>{{ user.about_me }}</p>
+                     <a href="{{ url_for('edit_about_me') }}" class="btn btn-primary">Edit</a>
                 </div>
             </div>
 
