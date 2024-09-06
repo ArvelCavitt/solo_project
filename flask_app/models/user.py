@@ -20,13 +20,14 @@ class User:
         self.password  = data.get('password')
         self.location = data.get('location', None)
         self.about_me = data.get('about_me', '')
+        self.goal = data.get('goals', '')
         self.created_at  = data.get('created_at')
         self.updated_at  = data.get('updated_at')
         self.training = []
 
     @classmethod
     def save(cls,data):
-        query = "INSERT INTO user (first_name, last_name, age, email, password, location, about_me) VALUES (%(first_name)s, %(last_name)s, %(age)s, %(email)s, %(password)s, %(location)s, %(about_me)s)"
+        query = "INSERT INTO user (first_name, last_name, age, email, password, location, about_me, goal) VALUES (%(first_name)s, %(last_name)s, %(age)s, %(email)s, %(password)s, %(location)s, %(about_me)s, %(goal)s)"
         return connectToMySQL(cls.db).query_db(query,data)
 
     @classmethod
@@ -88,6 +89,11 @@ class User:
         if result:
             return cls(result[0])
         return None
+
+    @classmethod
+    def update_goals(cls, data):
+        query = "UPDATE user SET goal = %(goal)s, updated_at = NOW() WHERE id = %(id)s;"
+        return connectToMySQL(cls.db).query_db(query, data)
 
     @staticmethod
     def validate_register(user):

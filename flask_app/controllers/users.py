@@ -73,3 +73,18 @@ def edit_about_me():
     
     user = User.get_by_id({'id': user_id})
     return render_template('edit_about_me.html', user=user)
+
+@app.route('/update_goal', methods=['POST'])
+def update_goal():
+    goal = request.form.get('goal')
+    other_goal = request.form.get('other_goal')
+
+    if goal == 'Other' and other_goal:
+        goal = other_goal
+
+    data = {
+        "goal": goal,
+        "user_id": session['user_id']
+    }
+
+    query = "UPDATE user SET goal = %(goal)s WHERE id = %()s"
