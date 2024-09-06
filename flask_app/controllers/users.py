@@ -87,4 +87,7 @@ def update_goal():
         "user_id": session['user_id']
     }
 
-    query = "UPDATE user SET goal = %(goal)s WHERE id = %()s"
+    query = "UPDATE user SET goal = %(goal)s WHERE id = %(user_id)s;"
+    connectToMySQL('fitness').query_db(query, data)
+    flash("Goal updated successfully!")
+    return redirect('/dashboard')
