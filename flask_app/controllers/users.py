@@ -1,5 +1,6 @@
 from flask import render_template, request, redirect, session, flash
 from flask_app import app
+from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.user import User
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)

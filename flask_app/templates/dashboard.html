@@ -72,23 +72,27 @@
                 <div class="card-header bg-warning text-white">
                     <h2 class="mb-0">Personal Goals</h2>
                 </div>
-                <div class="card-body">
-                    <!-- Add content for Personal Goals here -->
-                     <label for="goal" class="form-lable">Select Your Goal</label>
-                     <select name="goal" id="goal" class="form-select" onchange="toggleOtherGoalInput(this)">
-                        <option value="" disabled selected>Select a goal</option>
-                        <option value="Lose weight">Lose Weight</option>
-                        <option value="Build muscle">Build Muscle</option>
-                        <option value="Increase endurance">Increase endurance</option>
-                        <option value="Improve flexibility">Improve Flexibility</option>
-                        <option value="Maintain current fitness level">Maintian current fitness level</option>
-                        <option value="Other">Other</option>
-                     </select>
-                </div>
-                <div id="otherGoalContainer" class="mb-3" style="display: none;">
-                    <label for="other_goal" class="form-lable">Enter Your Goal</label>
-                    <input type="text" id="other_goal" name="other_goal" class="form-control" placeholder="Enter your custom goal">
-                </div>
+                <form action="/update_goal" method="POST">
+                    <div class="mb-3">
+                        <label for="goal" class="form-label"></label>
+                        <select id="goal" name="goal" class="form-select" onchange="toggleOtherGoalInput(this)">
+                            <option value="" disabled selected>Select a goal</option>
+                            <option value="Lose weight">Lose weight</option>
+                            <option value="Build muscle">Build muscle</option>
+                            <option value="Increase endurance">Increase endurance</option>
+                            <option value="Improve flexibility">Improve flexibility</option>
+                            <option value="Maintain current fitness level">Maintain current fitness level</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                
+                    <div id="otherGoalContainer" class="mb-3" style="display: none;">
+                        <label for="other_goal" class="form-label">Enter Your Goal</label>
+                        <input type="text" id="other_goal" name="other_goal" class="form-control" placeholder="Enter your custom goal">
+                    </div>
+                
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             </div>
         </div>
 
