@@ -31,8 +31,14 @@
                     </div>
                 </div>
                 <div>
-                    <a href="/new" class="btn btn-success btn-sm me-2">Add a workout</a>
-                    <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Profile
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item" href="/edit_profile">Edit Profile</a></li>
+                        <li><a class="dropdown-item" href="/new">Add a workout</a></li>
+                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
