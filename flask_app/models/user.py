@@ -20,7 +20,7 @@ class User:
         self.password  = data.get('password')
         self.location = data.get('location', None)
         self.about_me = data.get('about_me', '')
-        self.goal = data.get('goals', '')
+        self.goal = data.get('goal', '')
         self.created_at  = data.get('created_at')
         self.updated_at  = data.get('updated_at')
         self.training = []
@@ -84,7 +84,7 @@ class User:
     
     @classmethod
     def get_by_id(cls, data):
-        query = "SELECT * FORM user WHERE id = %(id)s;"
+        query = "SELECT * FROM user WHERE id = %(id)s;"
         result = connectToMySQL(cls.db).query_db(query, data)
         if result:
             return cls(result[0])
@@ -93,6 +93,21 @@ class User:
     @classmethod
     def update_goals(cls, data):
         query = "UPDATE user SET goal = %(goal)s, updated_at = NOW() WHERE id = %(id)s;"
+        return connectToMySQL(cls.db).query_db(query, data)
+
+    @classmethod
+    def update(cls, data):
+        query = """
+        UPDATE user
+        SET location=%(location)s, age=%(age)s, about_me=%(about_me)s, goal=%(goal)s,
+        """
+
+        #for updating profile picture
+        if 'profile_picture' in data:
+            query += ", profile_picture=%(profile_picture)s"
+        
+        query += "WHERE id=%(id)s;"
+
         return connectToMySQL(cls.db).query_db(query, data)
 
     @staticmethod

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit Profile</title>
+</head>
+<body>
+    <form action="/update_profile" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="profile_picture">Profile Picture:</label>
+            <input type="file" class="form-control" name="profile_picture" id="profile_picture">
+        </div>
+        
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" class="form-control" name="location" id="location" value="{{ user.location }}">
+        </div>
+        
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" class="form-control" name="age" id="age" value="{{ user.age }}">
+        </div>
+        
+        <div class="form-group">
+            <label for="about_me">About Me:</label>
+            <textarea class="form-control" name="about_me" id="about_me">{{ user.about_me }}</textarea>
+        </div>
+    
+        <div class="form-group">
+            <label for="goal">Personal Goal:</label>
+            <select class="form-control" name="goal" id="goal">
+                <option value="lose_weight" {% if user.goal == 'lose_weight' %}selected{% endif %}>Lose Weight</option>
+                <option value="gain_muscle" {% if user.goal == 'gain_muscle' %}selected{% endif %}>Gain Muscle</option>
+                <option value="increase_endurance" {% if user.goal == 'increase_endurance' %}selected{% endif %}>Increase Endurance</option>
+                <option value="other" {% if user.goal == 'other' %}selected{% endif %}>Other</option>
+            </select>
+            <input type="text" class="form-control mt-2" name="other_goal" id="other_goal" placeholder="Specify your goal if other" {% if user.goal == 'other' %}value="{{ user.goal }}"{% endif %}>
+        </div>
+    
+        <button type="submit" class="btn btn-primary mt-4">Save Changes</button>
+    </form>
+</body>
+</html>

@@ -92,3 +92,39 @@ def update_goal():
     connectToMySQL('fitness').query_db(query, data)
     flash("Goal updated successfully!")
     return redirect('/dashboard')
+
+@app.route('/edit_profile')
+def edit_profile():
+    if 'user_id' not in session:
+        return redirect('/')
+
+    data = {
+        'id': session['user_id']
+    }
+    current_user = User.get_by_id(data)
+
+    return render_template("edit_profile.html", user=current_user)
+
+@app.route('/update_profile', methods=['POST'])
+def update_profile():
+    if 'user_id' not in session:
+        return redirect('/')
+
+    data = {
+        'id': session['user_id'],
+        'location': request.form['location'],
+        'age': request.form['age'],
+        'about_me': request.form['about_me'],
+        'goal' : request.form['goal'] if request.form['goal'] != 'other' else request.form['other_goal']
+    }
+
+    #profile picture upload
+    if 'profile_picture' in request.files and request.files['profile_picture'].filename != '':
+        profile_picture = request.files['profile_picture']
+        profile_picture_path = os.path.join(app.config['UPLOAD_FOLDER'], profile_picture.filename)
+        profile_picture.save(profile_picture_path)
+        data['profile_picture'] = profile_picture.filename
+
+    User.update(data)
+
+    return redirect('/dashboard')

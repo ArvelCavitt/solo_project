@@ -47,7 +47,7 @@
                     <h2 class="mb-0">User Info</h2>
                 </div>
                 <div class="card-body">
-                    <p><img src="path_to_profile_picture" alt="Profile Picture" class="img-fluid"></p>
+                    <p><img src="{{ url_for('static', filename='uploads/' ~ user.profile_picture) }}" alt="Profile Picture" class="img-thumbnail" style="width: 150px;"></p>
                     <p>{{ user.first_name }} {{ user.last_name }}</p>
                     <p>Location: {{ user.location }}</p>
                     <p>Age: {{ user.age }}</p>
@@ -71,6 +71,9 @@
             <div class="card mb-4">
                 <div class="card-header bg-warning text-white">
                     <h2 class="mb-0">Personal Goals</h2>
+                </div>
+                <div class="card-body">
+                    <p>{{ user.goal }}</p>
                 </div>
                 <form action="/update_goal" method="POST">
                     <div class="mb-3">
