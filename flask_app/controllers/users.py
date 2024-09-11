@@ -1,3 +1,4 @@
+import os
 from flask import render_template, request, redirect, session, flash
 from flask_app import app
 from flask_app.config.mysqlconnection import connectToMySQL
@@ -115,13 +116,16 @@ def update_profile():
         'location': request.form['location'],
         'age': request.form['age'],
         'about_me': request.form['about_me'],
-        'goal' : request.form['goal'] if request.form['goal'] != 'other' else request.form['other_goal']
+        'goal': request.form['goal'] if request.form['goal'] != 'other' else request.form['other_goal']
     }
 
-    #profile picture upload
+    uploads_folder = app.config['UPLOAD_FOLDER']
+    if not os.path.exists(uploads_folder):
+        os.makedirs(uploads_folder)
+
     if 'profile_picture' in request.files and request.files['profile_picture'].filename != '':
         profile_picture = request.files['profile_picture']
-        profile_picture_path = os.path.join(app.config['UPLOAD_FOLDER'], profile_picture.filename)
+        profile_picture_path = os.path.join(uploads_folder, profile_picture.filename)
         profile_picture.save(profile_picture_path)
         data['profile_picture'] = profile_picture.filename
 
