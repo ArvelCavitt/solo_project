@@ -21,6 +21,7 @@ class User:
         self.location = data.get('location', None)
         self.about_me = data.get('about_me', '')
         self.goal = data.get('goal', '')
+        # adding self.profile_picture = data.get('profile_picture')
         self.created_at  = data.get('created_at')
         self.updated_at  = data.get('updated_at')
         self.training = []

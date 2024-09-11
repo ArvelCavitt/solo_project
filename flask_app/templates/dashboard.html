@@ -53,7 +53,10 @@
                     <h2 class="mb-0">User Info</h2>
                 </div>
                 <div class="card-body">
-                    <p><img src="{{ url_for('static', filename='uploads/' ~ user.profile_picture) }}" alt="Profile Picture" class="img-thumbnail" style="width: 150px;"></p>
+                    <p>
+                        <img src="{{ url_for('static', filename='uploads/' + user.profile_picture) if user.profile_picture else url_for('static', filename='img/fitnesslogo.png') }}"
+                             alt="Profile Picture" class="img-thumbnail" style="width: 150px;">
+                    </p>
                     <p>{{ user.first_name }} {{ user.last_name }}</p>
                     <p>Location: {{ user.location }}</p>
                     <p>Age: {{ user.age }}</p>
